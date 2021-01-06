@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-replicaSet
+spec:
+  template:
+    metadata: 
+      name: app
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app-container
+          image: docker.io/some-image:1.0
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+  replicas: 4
+  selector:
+    matchLabels:
+      app: app

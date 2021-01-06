@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-cms-configmap
+data:
+  HOST_DB: svc-app-db:3306
+  USER_DB: 
+  PASS_DB: 
+  DATABASE_DB: 

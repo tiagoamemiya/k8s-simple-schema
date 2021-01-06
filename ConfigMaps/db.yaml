@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-db-configmap
+data:
+  MYSQL_ROOT_PASSWORD: 
+  MYSQL_DATABASE: 
+  MYSQL_PASSWORD: 

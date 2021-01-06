@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: app-cms-statefulset
+spec:
+  replicas: 1
+    selector:
+    matchLabels:
+      app: app-cms
+  template:
+    metadata:
+      name: app-cms
+      labels:
+        app: app-cms
+    spec:
+      containers:
+        - name: app-cms-container
+          image: docker.io/some-image:1.0
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: app-cms-configmap 
+          volumeMounts:
+            - name: storage
+            mountPath: /storage
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: storage-pvc
+  selector:
+    matchLabels:
+      app: app-cms
+  serviceName: svc-app-cms
