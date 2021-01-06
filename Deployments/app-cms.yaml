@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-cms-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-cms
+  template:
+    metadata:
+      name: app-cms
+      labels:
+        app: app-cms
+    spec:
+      containers:
+        - name: app-cms-container
+          image: docker.io/some-image:1.0
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: app-cms-configmap 

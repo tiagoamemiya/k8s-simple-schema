@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-db
+  template:
+    metadata:
+      name: app-db
+      labels: 
+        app: app-db
+    spec:
+      containers:
+        - name: app-db-container
+          image: docker.io/some-db-image:1.0
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: app-db-configmap 
