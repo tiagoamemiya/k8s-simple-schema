@@ -24,6 +24,20 @@ spec:
           volumeMounts:
             - name: storage
             mountPath: /storage
+          livenessProbe: # checa se a aplicação esta saudável
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe: # checa se a aplicação esta pronta para responder
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
       volumes:
         - name: storage
           persistentVolumeClaim:
